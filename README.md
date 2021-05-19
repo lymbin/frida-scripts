@@ -22,7 +22,7 @@ When attach (app is already running) need to be run in privileged mode.
 
 ### Scan process memory and search string
 
-`python3 frida-memory-dumper.py --scan --spattern <string> <process_name>`
+`python3 frida-memory-dumper.py --scan --string <string> <process_name>`
 
 ### Interactive Dump all process memory
 
@@ -42,4 +42,4 @@ Scan firefox memory and search bytes
 
 Scan firefox memory and search string
 
-`python3 frida-memory-dumper.py --scan --spattern "12345678" firefox`
+`python3 frida-memory-dumper.py --scan --string "12345678" firefox`
