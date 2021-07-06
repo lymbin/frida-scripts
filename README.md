@@ -4,6 +4,8 @@
 
 Tool for memory dump and search data in process memory.
 
+Worked on Linux and Windows.
+
 When attach (app is already running) need to be run in privileged mode.
 
 ## Usage
@@ -31,6 +33,10 @@ When attach (app is already running) need to be run in privileged mode.
 Press Enter to dump memory when you want.
 
 ## Examples
+
+Dump process with 1234 id
+
+`python3 frida-memory-dumper.py --dump 1234`
 
 Dump firefox process in interactive mode
 

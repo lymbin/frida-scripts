@@ -6,7 +6,7 @@ import subprocess
 import time
 import shutil
 
-version = '1.1'
+version = '1.2'
 PROTECTION = 'r--'
 
 
@@ -97,13 +97,22 @@ def scan_memory(process, pattern, interactive=False, protection=PROTECTION):
 
 def dump_memory(process, output, interactive=False, protection=PROTECTION):
     print('Dumping %s memory.' % process)
+    try:
+        proc = int(process)
+    except ValueError:
+        proc = process
     if not os.path.isabs(output):
         output = os.path.join(os.path.dirname(os.path.realpath(__file__)), output)
     try:
         os.mkdir(output)
     except OSError as error:
         pass
-    session = attach(process)
+        
+    if sys.platform == "win32":
+        output = output.replace('\\', '/')
+        
+    print (output)
+    session = attach(proc)
     if interactive:
         print('[Interactive] Press Enter to dump...')
         input()
@@ -121,7 +130,7 @@ def dump_memory(process, output, interactive=False, protection=PROTECTION):
         var failedDumps = 0;
         console.log('[BEGIN] Located ' + totalRanges + ' memory ranges matching [' + '%s' + ']');
         ranges.forEach(function (range) {
-            var destFileName = "%s/".concat(range.base, "_dump");
+            var destFileName = '%s/'.concat(range.base, "_dump");
             var arrayBuf;
             try {
                 arrayBuf = range.base.readByteArray(range.size);
@@ -143,7 +152,11 @@ def dump_memory(process, output, interactive=False, protection=PROTECTION):
 
 def read_memory(process, addr, size):
     print('Reading %s memory.' % process)
-    session = attach(process)
+    try:
+        proc = int(process)
+    except ValueError:
+        proc = process
+    session = attach(proc)
     script = session.create_script("""
         var buf = Memory.readByteArray(ptr('0x%x'), %d);
         console.log(hexdump(buf, {
