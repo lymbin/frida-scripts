@@ -6,7 +6,21 @@ Tool for memory dump and search data in process memory.
 
 Worked on Linux and Windows.
 
-When attach (app is already running) need to be run in privileged mode.
+Has 2 modes: **spawn** and **attach**.
+
+**When spawn (app not running yet) may run from user.**
+
+**When attach (app is already running) need to be run in privileged mode.**
+
+## Install
+
+Works only with **Python >=3.7** and need a **pip3** package.
+
+`sudo pip3 intall -r requirements.txt`
+
+### Note: new frida 16 need updated version of pip, wheel and setuptools
+
+`sudo pip3 install --upgrade pip setuptools wheel`
 
 ## Usage
 
